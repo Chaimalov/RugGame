@@ -13,17 +13,20 @@ public class Board {
             for (int j = 0; j < board.length; j++) {
                 if (i == 0 || j == 0 || i == board.length - 1 || j == board.length - 1)
                     board[i][j] = '#';
-                else if(i >= rug.getTopLeft().getY()
-                        && i < rug.getTopLeft().getY() + rug.getSize()
-                        && j >= rug.getTopLeft().getX()
-                        && j < rug.getTopLeft().getX() + rug.getSize()) board[i][j] = '*';
+                else if(i >= rug.getTopRightCorner().getY()
+                        && i < rug.getBottomLeftCorner().getY()
+                        && j >= rug.getTopLeftCorner().getX()
+                        && j < rug.getBottomRightCorner().getX()) board[i][j] = '*';
                 else board[i][j] = ' ';
             }
         }
     }
 
     public boolean updatePlayerLocation(Player player){
-        if(isPlayerWon(player)) return true;
+        if(isPlayerWon(player)) {
+            player.setMessage("Player" + player.getPlayerNumber() + " Won!");
+            return true;
+        }
         board[player.getLocation().getY()][player.getLocation().getX()] = player.getPlayerNumber();
         return false;
     }
@@ -49,9 +52,9 @@ public class Board {
     }
 
     public void printBoard(){
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                System.out.print(board[i][j] + "  ");
+        for (char[] row : board) {
+            for (char cell : row) {
+                System.out.print(cell + "  ");
             }
             System.out.println();
         }

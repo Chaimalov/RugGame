@@ -5,6 +5,10 @@ public class Player {
     private int numberOfWins;
     private String message;
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Player(int playerNumber) {
         this.stepsCount = 0;
         this.numberOfWins = 0;

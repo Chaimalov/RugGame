@@ -24,7 +24,7 @@ public class Game {
     //Level 1
     public void setup(){
         System.out.println("Enter the Rug x-y coordinates:");
-        while (!board.getRug().setRugTopLeft(new Coords(scanner.nextInt(), scanner.nextInt()))){
+        while (!board.getRug().setTopLeftCorner(new Coords(scanner.nextInt(), scanner.nextInt()))){
             System.out.println("Rug placement isn't right.\nEnter valid x-y coordinates:");
         }
         System.out.println("Enter the Rug size:");
@@ -40,7 +40,7 @@ public class Game {
     }
 
     public boolean turn(){
-        boolean win = false;
+        boolean win;
         for (Player player: players) {
             board.clearPlayerLocation(player);
             System.out.println("Player" + player.getPlayerNumber() + " make a move:");
@@ -69,8 +69,8 @@ public class Game {
         board.initBoard();
         for (Player player: players) {
             if(board.updatePlayerLocation(player)){
-                System.out.println("player" + player.getPlayerNumber() + " won!");
                 player.setNumberOfWins(player.getNumberOfWins() + 1);
+                System.out.println(player.getMessage());
                 board.printBoard();
                 return;
             }
@@ -87,7 +87,7 @@ public class Game {
 
         //Print statistics
         for (Player player: players) System.out.println(player);
-        System.out.println(players[getOverallWinner()-1] + " Wins!");
+        System.out.println(players[getOverallWinner()-1].getMessage());
     }
 
     private int getOverallWinner(){
@@ -113,11 +113,10 @@ public class Game {
 
     //Level 3
     private int getPlayerDistance(Coords player){
-       int size = board.getRug().getSize();
-       Coords topLeftCorner = board.getRug().getTopLeft();
-       Coords topRightCorner = new Coords(topLeftCorner.getX()+size, topLeftCorner.getY());
-       Coords bottomLeftCorner = new Coords(topLeftCorner.getX(), topLeftCorner.getY()+size);
-       Coords bottomRightCorner = new Coords(topLeftCorner.getX()+size, topLeftCorner.getY()+size);
+       Coords topLeftCorner = board.getRug().getTopLeftCorner();
+       Coords topRightCorner = board.getRug().getTopRightCorner();
+       Coords bottomLeftCorner = board.getRug().getBottomLeftCorner();
+       Coords bottomRightCorner = board.getRug().getBottomRightCorner();
 
 
         if(player.getX() < topLeftCorner.getX()){

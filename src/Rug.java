@@ -1,7 +1,9 @@
 public class Rug {
     private int size;
-    private Coords topLeft;
-    private Coords center;
+    private Coords topLeftCorner;
+    private Coords topRightCorner;
+    private Coords bottomLeftCorner;
+    private Coords bottomRightCorner;
 
     public Rug() {}
 
@@ -10,27 +12,37 @@ public class Rug {
     }
 
     public boolean setSize(int size) {
-        if(!new Coords(topLeft.getX()+size, topLeft.getY()+size).checkCoords()) return false;
+        if(!new Coords(topLeftCorner.getX()+size, topLeftCorner.getY()+size).checkCoords()) return false;
         this.size = size;
-        setCenter();
+        setCorners();
         return true;
     }
 
-    private void setCenter(){
-        center = new Coords(topLeft.getX()+(size/2), topLeft.getY()+(size/2));
+    private void setCorners(){
+        topRightCorner = new Coords(topLeftCorner.getX()+size, topLeftCorner.getY());
+        bottomLeftCorner = new Coords(topLeftCorner.getX(), topLeftCorner.getY()+size);
+        bottomRightCorner = new Coords(topLeftCorner.getX()+size, topLeftCorner.getY()+size);
     }
 
-    public Coords getCenter() {
-        return center;
+    public Coords getTopRightCorner() {
+        return topRightCorner;
     }
 
-    public Coords getTopLeft() {
-        return topLeft;
+    public Coords getBottomLeftCorner() {
+        return bottomLeftCorner;
     }
 
-    public boolean setRugTopLeft(Coords rugTopLeft) {
-        if(!rugTopLeft.checkCoords()) return false;
-        this.topLeft = rugTopLeft;
+    public Coords getBottomRightCorner() {
+        return bottomRightCorner;
+    }
+
+    public Coords getTopLeftCorner() {
+        return topLeftCorner;
+    }
+
+    public boolean setTopLeftCorner(Coords topLeftCorner) {
+        if(!topLeftCorner.checkCoords()) return false;
+        this.topLeftCorner = topLeftCorner;
         return true;
     }
 }
