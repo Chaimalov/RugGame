@@ -105,7 +105,6 @@ public class Game {
 
     private int calcStepsX(Coords player, Coords corner){
         return Math.abs(player.getX() - (corner.getX()));
-
     }
 
     private int calcStepsY(Coords player, Coords corner){
@@ -119,37 +118,28 @@ public class Game {
        Coords bottomLeftCorner = board.getRug().getBottomLeftCorner();
        Coords bottomRightCorner = board.getRug().getBottomRightCorner();
 
-
         if(player.getX() < topLeftCorner.getX()){
             if(player.getY() < topLeftCorner.getY()){
                 return calcStepsCorner(player, topLeftCorner);
             }
-            else if(player.getY() > bottomLeftCorner.getY()){
+            if(player.getY() > bottomLeftCorner.getY()){
                 return calcStepsCorner(player, bottomLeftCorner);
             }
-            else{
                 return calcStepsX(player, topLeftCorner);
-            }
         }
-        else if(player.getX() > topRightCorner.getX()){
+        if(player.getX() > topRightCorner.getX()){
             if(player.getY() < topRightCorner.getY()){
                 return calcStepsCorner(player, topRightCorner);
             }
-            else if(player.getY() > bottomRightCorner.getY()){
+            if(player.getY() > bottomRightCorner.getY()){
                 return calcStepsCorner(player, bottomRightCorner);
             }
-            else{
                 return calcStepsX(player, topRightCorner);
-            }
         }
-        else{
-            if(player.getY() < topRightCorner.getY()){
+        if(player.getY() < topRightCorner.getY()){
                 return calcStepsY(player, topRightCorner);
             }
-            else{
-                return calcStepsY(player, bottomRightCorner);
-            }
-        }
+        return calcStepsY(player, bottomRightCorner);
     }
 
     public int getWinnerWithBestChances(){
