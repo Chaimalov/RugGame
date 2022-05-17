@@ -100,15 +100,16 @@ public class Game {
     }
 
     private int calcStepsCorner(Coords player, Coords corner){
-        return Math.abs(player.getX() - (corner.getX())) + Math.abs(player.getY() - (corner.getY())) + 1;
+        return calcStepsX(player, corner) + calcStepsY(player, corner) + 1;
     }
 
     private int calcStepsX(Coords player, Coords corner){
-        return Math.abs(player.getX() - (corner.getX())) + 1;
+        return Math.abs(player.getX() - (corner.getX()));
+
     }
 
     private int calcStepsY(Coords player, Coords corner){
-        return Math.abs(player.getY() - corner.getY()) + 1;
+        return Math.abs(player.getY() - corner.getY());
     }
 
     //Level 3
